@@ -80,28 +80,7 @@ export const sendERC20Token = async (req, res) => {
   }
 };
 
-// Send Native Token
-// export const sendNativeToken = async (req, res) => {
-//   try {
-//     const { addressToReceive, amountToSend, privateKey } = req.body;
 
-//     const provider = new ethers.JsonRpcProvider(PolygonZkevm);
-//     const wallet = new ethers.Wallet(privateKey, provider);
-
-//     const tx = await wallet.sendTransaction({
-//       to: addressToReceive,
-//       value: ethers.parseEther(amountToSend.toString()),
-//     });
-//     res
-//       .status(200)
-//       .json(
-//         `Transfer of ${amountToSend} has been sent successfully to ${addressToReceive}`
-//       );
-//     return tx.hash;
-//   } catch (error) {
-//     res.status(500).json(`Failed to send ERC20 token`);
-//   }
-// };
 export const sendNativeToken = async (req, res) => {
   try {
     const { addressToReceive, amountToSend, privateKey } = req.body;
@@ -228,50 +207,3 @@ export const getTransactionHistory = async (req, res) => {
   }
 };
 
-// import fetch from 'node-fetch';
-// import axios from 'axios';
-// export const fetchTransactionHistory = async (req, res) => {
-//     try {
-//         const { address } = req.params;
-//         const apiKey = process.env.POLYGONSCAN_API_KEY;
-
-//         // Check if API key exists
-//         if (!apiKey) {
-//             return res.status(500).json({ error: 'API key is missing' });
-//         }
-
-//         // Construct the API URL
-//         const url = `https://api-testnet.polygonscan.com/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=${apiKey}`;
-
-//         // Fetch transaction history with timeout (set to 10 seconds)
-//         const response = await axios(url, { timeout: 10000 });
-//         console.log(response)
-//         // Check if the response is OK (status code 200)
-//         if (!response.ok) {
-//             const text = await response.text(); // Retrieve the full response text for inspection
-//             console.error('Non-JSON response received:', text);
-//             return res.status(response.status).json({ error: 'Failed to fetch transaction history', details: text });
-//         }
-
-//         // Attempt to parse the response as JSON
-//         const data = await response.json();
-
-//         // Check for API-specific errors
-//         if (data.status !== '1') {
-//             return res.status(400).json({ error: 'Failed to fetch transaction history', details: data.message });
-//         }
-
-//         // Send the transaction history data
-//         res.json({ transactions: data.result });
-
-//     } catch (error) {
-//         // Handle timeout or other network errors
-//         if (error.type === 'system' && error.code === 'ETIMEDOUT') {
-//             console.error('Request timed out');
-//             return res.status(504).json({ error: 'Request timed out, please try again' });
-//         }
-
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal Server Error', details: error.message });
-//     }
-// };

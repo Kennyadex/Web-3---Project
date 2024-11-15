@@ -7,9 +7,7 @@ import { createNewWallet, sendERC20Token, sendNativeToken, queryERC20Balance, qu
 const router = express.Router();
 
 // Create new wallet
-router.get('/create-wallet', createNewWallet
-);
-
+router.get('/create-wallet', createNewWallet);
 router.post('/transaction/erc20', sendERC20Token);
 router.post('/transaction/native', sendNativeToken);
 router.get('/balance/native/:address', queryNativeBalance);
